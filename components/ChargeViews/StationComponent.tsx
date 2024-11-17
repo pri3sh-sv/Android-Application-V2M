@@ -79,7 +79,7 @@ const StationComponent = () => {
                 }}
                 onFail={(error) => console.error('Places API Error:', error)}
                 query={{
-                    key: 'AIzaSyDOKkabnKbWNVc8QYZmEgotd1RrViVzg8Q', // Replace with your actual key
+                    key: '', // Replace with your actual key
                     language: 'en',
                 }}
                 nearbyPlacesAPI="GooglePlacesSearch"
