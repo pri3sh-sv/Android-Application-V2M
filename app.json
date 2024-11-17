@@ -4,17 +4,33 @@
     "slug": "v2m",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/v2mlogo.png",
+    "splash": {
+      "image": "./assets/images/v2mlogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "ios": {
+        "config": {
+          "googleMapsApiKey": "AIzaSyDOKkabnKbWNVc8QYZmEgotd1RrViVzg8Q"
+        }
+      }
+
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDOKkabnKbWNVc8QYZmEgotd1RrViVzg8Q"
+        }
       }
     },
     "web": {

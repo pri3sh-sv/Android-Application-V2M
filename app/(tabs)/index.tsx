@@ -1,74 +1,115 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React, {useState} from "react";
+import {Text, View, StyleSheet, Image} from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+import CarSelectionComponent from "@/components/CarSelection";
+import {Button, H1, H3, H4, XStack, YStack} from "tamagui";
+import Vehicle from "@/components/HomeViews/vehicle";
+import Controls from "@/components/HomeViews/controls";
+import Analytics from "@/components/HomeViews/analytics";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const Page = () => {
+    const [activeTab, setActiveTab] = useState<"vehicle"|"controls"|"analytics">("controls");
+    const [val, setVal] = useState('tesla')
 
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+    const handleTabChange = (tab : "vehicle"|"controls"|"analytics") => {
+        setActiveTab(tab);
+    }
+
+    const renderTabContent = (val:string) => {
+        switch (activeTab) {
+            case "vehicle":
+                return <Vehicle val={val}/>
+            case "controls":
+                return <Controls/>
+            case "analytics":
+                return <Analytics/>
+            default:
+                return null;
+        }
+    }
+
+    return (
+        <View style={styles.container}>
+            <LinearGradient
+                colors={[
+                    'rgb(0,0,0)', // Darker near the top
+                    'rgb(0,0,0)', // Slightly lighter towards the center
+                    'rgba(20,20,20,0.84)', // Even lighter
+                    'rgba(21,18,18,0.76)', // Light grey near the bottom
+                ]}
+                style={styles.background}
+            />
+            <YStack flex={1}>
+                <YStack flex={1} justifyContent="flex-start" padding={"3%"}>
+                    <CarSelectionComponent value={val} setValue={setVal}/>
+                    <Image
+                        source={require("../../assets/images/car.png")}
+                        style={{ width: "90%", height: "70%", alignSelf: "center", marginTop:"auto"}}
+                    />
+                </YStack>
+
+                <YStack flex={1} justifyContent={"flex-start"} padding={"3%"}>
+                    <XStack width={"max-content"} height={"10%"} justifyContent={"space-around"} marginTop={"8%"} >
+                        <Button
+                            flex={1}
+                            backgroundColor="transparent"
+                            borderWidth={0}
+                            borderBottomWidth={2}
+                            borderColor={activeTab === "vehicle" ? "#fff" : "#aaa"}
+                            onPress={() => handleTabChange("vehicle")}
+                        >
+                            <H3 color={activeTab === "vehicle" ? "#fff" : "#aaa"} textAlign="center">
+                                Vehicle
+                            </H3>
+                        </Button>
+
+                        <Button
+                            flex={1}
+                            backgroundColor="transparent"
+                            borderWidth={0}
+                            borderBottomWidth={2}
+                            borderColor={activeTab === "controls" ? "#fff" : "#aaa"}
+                            onPress={() => handleTabChange("controls")}
+                        >
+                            <H3 color={activeTab === "controls" ? "#fff" : "#aaa"} textAlign="center">
+                                Controls
+                            </H3>
+                        </Button>
+
+                        <Button
+                            flex={1}
+                            backgroundColor="transparent"
+                            borderWidth={0}
+                            borderBottomWidth={2}
+                            borderColor={activeTab === "analytics" ? "#fff" : "#aaa"}
+                            onPress={() => handleTabChange("analytics")}
+                        >
+                            <H3 color={activeTab === "analytics" ? "#fff" : "#aaa"} textAlign="center">
+                                Analytics
+                            </H3>
+                        </Button>
+                    </XStack>
+                    <YStack flex={1}>
+                        {renderTabContent(val)}
+                    </YStack>
+                </YStack>
+
+            </YStack>
+        </View>
+    )
 }
 
+export default Page
+
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+    container: {
+        flex: 1,
+    },
+    background: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        height: 1800,
+    },
+})
