@@ -17,10 +17,9 @@
       "supportsTablet": true,
       "ios": {
         "config": {
-          "googleMapsApiKey": ""
+          "googleMapsApiKey": "AIzaSyDXFs1aEjvPeX_k1FZdv94qNEVdNor6N6c"
         }
       }
-
     },
     "android": {
       "adaptiveIcon": {
@@ -29,9 +28,10 @@
       },
       "config": {
         "googleMaps": {
-          "apiKey": ""
+          "apiKey": "AIzaSyA2q6-WiPlmfrXSBlCuykiHFnzJDXPQxow"
         }
-      }
+      },
+      "package": "com.hassan.v2m"
     },
     "web": {
       "bundler": "metro",
@@ -52,6 +52,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e3e9623e-7728-49ac-9dbb-f9606b7936ca"
+      }
+    },
+    "owner": "pri3sh"
   }
 }

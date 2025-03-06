@@ -11,8 +11,6 @@ interface SelectDemoItemProps extends SelectProps {
 
 export const items = [
     {name: "TESLA", percentage: "73%", km: "510 KM", dValue:.73},
-    {name: "AQSA’S TESLA", percentage: "93%", km: "600 KM", dValue:.93},
-    {name: "ROSALYN'S CADILAC", percentage: "45%", km: "900 KM", dValue:.45},
 ]
 
 interface CarSelectionComponentProps {
