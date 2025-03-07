@@ -3,6 +3,8 @@ import {Adapt, FontSizeTokens, getFontSize, H3, H4, Select, SelectProps, Sheet, 
 import {Check, ChevronDown, ChevronUp} from "@tamagui/lucide-icons";
 import {LinearGradient} from 'tamagui/linear-gradient'
 import {Image, Pressable} from "react-native";
+import {useTelemetryStore} from "@/store/use-telemetry-store";
+import {calculateCarRange} from "@/utils/range-calculator";
 
 interface SelectDemoItemProps extends SelectProps {
     value: string;
@@ -20,6 +22,7 @@ interface CarSelectionComponentProps {
 
 const CarSelectionComponent = ({value, setValue}: CarSelectionComponentProps) => {
     // const [val, setVal] = useState('tesla')
+    const { data } = useTelemetryStore();
 
     const selectedCar = items.find((item) => item.name.toLowerCase() === value.toLowerCase());
 
@@ -35,10 +38,10 @@ const CarSelectionComponent = ({value, setValue}: CarSelectionComponentProps) =>
                             style={{width: 60, height: 60}}
                         />
                         <H3 color={"whitesmoke"} marginLeft={8}>
-                            {selectedCar?.percentage ?? "--%"}
+                            {data?.battery_percentage+" % "}
                         </H3>
                     </XStack>
-                    <H4 color={"whitesmoke"}>| {selectedCar?.km ?? "-- KM"}</H4>
+                    <H4 color={"whitesmoke"}>| {(calculateCarRange(data?.battery_percentage || 100, 600).toFixed(2))+" KM"}</H4>
                 </XStack>
             </YStack>
             <Pressable
