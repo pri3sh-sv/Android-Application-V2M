@@ -6,6 +6,18 @@ interface Props {
     text: string;
 }
 
+/**
+ * DataWrapper is a functional component that displays a message or animation
+ * when no data is available.
+ *
+ * @param {Object} Props - The props object for the component.
+ * @param {boolean} Props.isEmpty - A flag indicating whether the data is empty.
+ * If true, a placeholder animation and message will be displayed.
+ * @param {string} Props.text - The text to display alongside the animation when `isEmpty` is true.
+ *
+ * @returns {React.Component|null} Returns a React component displaying a no data
+ * placeholder when `isEmpty` is true, or null if `isEmpty` is false.
+ */
 const DataWrapper = ({ isEmpty, text }: Props) => {
     if (isEmpty) {
         return (

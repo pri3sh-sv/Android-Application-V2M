@@ -20,6 +20,16 @@ interface CarSelectionComponentProps {
     setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
+/**
+ * CarSelectionComponent renders a user interface that allows selecting a car
+ * and displays the battery status and estimated range of the selected car.
+ *
+ * @param {CarSelectionComponentProps} props - The props used to initialize the component.
+ * @param {string} props.value - The currently selected car model.
+ * @param {Function} props.setValue - The function used to update the selected car model.
+ *
+ * @returns {JSX.Element} A component that enables car selection and displays related telemetry data.
+ */
 const CarSelectionComponent = ({value, setValue}: CarSelectionComponentProps) => {
     // const [val, setVal] = useState('tesla')
     const { data } = useTelemetryStore();
